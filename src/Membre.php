@@ -11,7 +11,7 @@ class Membre
         $this->id = $id;
         $this->nom = $nom;
     }
-
+//Getters 
     public function getId(): int { return $this->id; }
     public function getNom(): string { return $this->nom; }
     public function getEmprunts(): array { return $this->emprunts; }
@@ -24,7 +24,7 @@ class Membre
         $l->emprunter(); // lève une Exception si déjà emprunté
         $this->emprunts[$l->getIsbn()] = $l;
     }
-  
+  // function to return a book and remove it from the member's list of borrowed books
      public function rendre(Livre $l): void
     {
         if (!isset($this->emprunts[$l->getIsbn()])) {
