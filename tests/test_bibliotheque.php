@@ -1,4 +1,3 @@
-
 <?php
 
 $bibliotheque = new Bibliotheque();
@@ -18,3 +17,7 @@ verifier($bibliotheque->rechercher('prince') === [$livreA], 'rechercher trouve d
 verifier($bibliotheque->rechercher('HUGO') === [$livreB], 'rechercher trouve dans le nom de l’auteur sans distinguer la casse');
 verifier($bibliotheque->rechercher('inconnu') === [], 'rechercher retourne une liste vide sans correspondance');
 verifier($bibliotheque->rechercher('   ') === [], 'rechercher ignore une requête vide');
+
+$bibliotheque->ajouter(new Livre('978-1', 'Titre corrigé', 'Auteur corrigé'));
+verifier($bibliotheque->compter() === 2, 'un ISBN déjà présent ne crée pas un doublon');
+verifier($bibliotheque->trouver('978-1')->getTitre() === 'Titre corrigé', 'un livre ajouté avec le même ISBN remplace l’entrée existante');
