@@ -16,6 +16,13 @@ class Membre
     public function getNom(): string { return $this->nom; }
     public function getEmprunts(): array { return $this->emprunts; }
 
-
+ public function emprunter(Livre $l): void
+    {
+        if (count($this->emprunts) >= self::MAX_EMPRUNTS) {
+            throw new Exception("Limite de " . self::MAX_EMPRUNTS . " livres atteinte");
+        }
+        $l->emprunter(); // lève une Exception si déjà emprunté
+        $this->emprunts[$l->getIsbn()] = $l;
+    }
   
 }
