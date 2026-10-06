@@ -25,4 +25,12 @@ class Membre
         $this->emprunts[$l->getIsbn()] = $l;
     }
   
+     public function rendre(Livre $l): void
+    {
+        if (!isset($this->emprunts[$l->getIsbn()])) {
+            throw new Exception("Ce livre n'a pas été emprunté par ce membre");
+        }
+        $l->rendre();
+        unset($this->emprunts[$l->getIsbn()]);
+    }
 }
