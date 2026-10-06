@@ -11,3 +11,10 @@ verifier($bibliotheque->trouver('978-1') === null, 'trouver retourne null si l�
 
 $bibliotheque->ajouter($livreA);
 $bibliotheque->ajouter($livreB);
+verifier($bibliotheque->compter() === 2, 'ajouter enregistre les livres');
+verifier($bibliotheque->trouver('978-1') === $livreA, 'trouver retourne le livre par ISBN');
+verifier(count($bibliotheque->tous()) === 2, 'tous retourne les livres du catalogue');
+verifier($bibliotheque->rechercher('prince') === [$livreA], 'rechercher trouve dans le titre sans distinguer la casse');
+verifier($bibliotheque->rechercher('HUGO') === [$livreB], 'rechercher trouve dans le nom de l’auteur sans distinguer la casse');
+verifier($bibliotheque->rechercher('inconnu') === [], 'rechercher retourne une liste vide sans correspondance');
+verifier($bibliotheque->rechercher('   ') === [], 'rechercher ignore une requête vide');
